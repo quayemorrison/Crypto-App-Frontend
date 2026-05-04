@@ -12,8 +12,10 @@ function Profile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
+        const token = localStorage.getItem('token');
         const response = await axios.get("/api/auth/profile", {
-          withCredentials: true
+          withCredentials: true,
+          headers: token ? { Authorization: `Bearer ${token}` } : {}
         });
         setUser(response.data);
       } catch (err) {
@@ -30,6 +32,7 @@ function Profile() {
   const handleLogout = async () => {
     try {
       await axios.post("/api/auth/logout", {}, { withCredentials: true });
+      localStorage.removeItem('token');
       localStorage.removeItem("cookieBannerDismissed");
       navigate("/signin");
     } catch (err) {
