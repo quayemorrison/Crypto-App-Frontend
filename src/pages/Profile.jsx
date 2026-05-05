@@ -47,7 +47,7 @@ function Profile() {
       await axios.post("/api/auth/logout", {}, { withCredentials: true });
       sessionStorage.removeItem('token');
       localStorage.removeItem("cookieBannerDismissed");
-      navigate("/signin");
+      navigate("/signin", { replace: true });
     } catch (err) {
       console.error("Logout failed", err);
     }
@@ -74,11 +74,11 @@ function Profile() {
       {/* Left Sidebar */}
       <aside className="w-[88px] h-screen sticky top-0 border-r border-gray-200 flex flex-col items-center py-6 shrink-0 z-50 bg-white">
         {/* Coinbase Logo */}
-        <div className="w-14 h-14 flex items-center justify-center mb-6 cursor-pointer shrink-0">
+        <Link to="/" className="w-14 h-14 flex items-center justify-center mb-6 cursor-pointer shrink-0 hover:opacity-80 transition-opacity">
           <svg viewBox="0 0 32 32" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M16 32C7.163 32 0 24.837 0 16S7.163 0 16 0c8.083 0 14.773 5.992 15.86 13.82h-9.141c-.818-3.053-3.6-5.32-6.719-5.32-3.866 0-7 3.134-7 7s3.134 7 7 7c3.12 0 5.9-2.267 6.719-5.32h9.141C29.773 26.008 23.083 32 16 32z" fill="#0052FF"/>
           </svg>
-        </div>
+        </Link>
 
         {/* Nav Icons */}
         <nav className="flex flex-col items-center gap-4 w-full">
