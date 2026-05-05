@@ -21,12 +21,19 @@ function Profile() {
 
   useEffect(() => {
     const fetchData = async () => {
+      const token = sessionStorage.getItem('token');
+      
+      // Immediate guard: If no token in session, don't even try to fetch
+      if (!token) {
+        navigate("/signin", { replace: true });
+        return;
+      }
+
       try {
-        const token = sessionStorage.getItem('token');
         const [profileRes, cryptoRes] = await Promise.all([
           axios.get("/api/auth/profile", {
             withCredentials: true,
-            headers: token ? { Authorization: `Bearer ${token}` } : {}
+            headers: { Authorization: `Bearer ${token}` }
           }),
           axios.get("/api/crypto")
         ]);
@@ -34,7 +41,7 @@ function Profile() {
         setCoins(cryptoRes.data);
       } catch (err) {
         setError("Not authorized or session expired. Please log in.");
-        setTimeout(() => navigate("/signin"), 2000);
+        navigate("/signin", { replace: true });
       } finally {
         setLoading(false);
       }
