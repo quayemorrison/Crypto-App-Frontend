@@ -4,7 +4,8 @@ import axios from "axios";
 import {
   Home, TrendingUp, LayoutGrid, FileText, MoreVertical, BarChart2,
   Search, Bell, HelpCircle, Grid, ChevronRight, Plus,
-  ArrowUp, ArrowDown, LogOut, ArrowRight, Globe, ChevronDown
+  ArrowUp, ArrowDown, LogOut, ArrowRight, Globe, ChevronDown,
+  UserPlus, Settings, Moon
 } from "lucide-react";
 import buysNotSupportedImg from "../assets/images/buys_not_supported.png";
 import watchlistImg from "../assets/images/watchlist.png";
@@ -15,6 +16,7 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState("buy");
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -209,9 +211,75 @@ function Profile() {
               </svg>
             </button>
             
-            {/* Avatar */}
-            <div className="w-10 h-10 rounded-full bg-[#3B82F6] flex items-center justify-center text-[16px] font-bold text-white cursor-pointer ml-1">
-              {user.name.charAt(0).toUpperCase()}
+            {/* Avatar & Dropdown */}
+            <div className="relative">
+              <div 
+                onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
+                className="w-10 h-10 rounded-full bg-[#0052FF] flex items-center justify-center text-[16px] font-bold text-white cursor-pointer ml-1 hover:brightness-90 transition-all"
+              >
+                {user.name.charAt(0).toUpperCase()}
+              </div>
+
+              {isProfileDropdownOpen && (
+                <>
+                  <div 
+                    className="fixed inset-0 z-40" 
+                    onClick={() => setIsProfileDropdownOpen(false)}
+                  />
+                  <div className="absolute right-0 top-[calc(100%+12px)] w-[320px] bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 py-2 z-50 animate-in fade-in zoom-in-95 duration-100">
+                    {/* User Info */}
+                    <div className="px-5 py-4 flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-[#0052FF] flex items-center justify-center text-[20px] font-bold text-white">
+                        {user.name.charAt(0).toUpperCase()}
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-[17px] font-bold text-[#0A0B0D]">{user.name}</span>
+                        <span className="text-[14px] text-[#5B616E]">{user.email}</span>
+                        <button className="text-[14px] font-bold text-[#0052FF] hover:text-[#0041CC] mt-0.5 text-left">Manage account</button>
+                      </div>
+                    </div>
+
+                    <div className="h-px bg-gray-100 my-1" />
+
+                    {/* Menu Items */}
+                    <button className="w-full px-5 py-3.5 flex items-center gap-4 hover:bg-gray-50 transition-colors group">
+                      <div className="w-8 h-8 flex items-center justify-center text-[#0A0B0D]">
+                        <UserPlus size={22} strokeWidth={1.5} />
+                      </div>
+                      <span className="text-[16px] font-semibold text-[#0A0B0D]">Add account</span>
+                    </button>
+
+                    <button className="w-full px-5 py-3.5 flex items-center gap-4 hover:bg-gray-50 transition-colors group">
+                      <div className="w-8 h-8 flex items-center justify-center text-[#0A0B0D]">
+                        <Settings size={22} strokeWidth={1.5} />
+                      </div>
+                      <span className="text-[16px] font-semibold text-[#0A0B0D]">Settings</span>
+                    </button>
+
+                    <div className="w-full px-5 py-3.5 flex items-center justify-between hover:bg-gray-50 transition-colors group cursor-pointer">
+                      <div className="flex items-center gap-4">
+                        <div className="w-8 h-8 flex items-center justify-center text-[#0A0B0D]">
+                          <Moon size={22} strokeWidth={1.5} />
+                        </div>
+                        <span className="text-[16px] font-semibold text-[#0A0B0D]">Dark mode</span>
+                      </div>
+                      <div className="w-[44px] h-[24px] bg-[#D0D5DD] rounded-full relative transition-colors">
+                        <div className="w-[20px] h-[20px] bg-white rounded-full absolute left-[2px] top-[2px] shadow-sm" />
+                      </div>
+                    </div>
+
+                    <button 
+                      onClick={handleLogout}
+                      className="w-full px-5 py-3.5 flex items-center gap-4 hover:bg-gray-50 transition-colors group text-[#DF2038]"
+                    >
+                      <div className="w-8 h-8 flex items-center justify-center">
+                        <LogOut size={22} strokeWidth={2} />
+                      </div>
+                      <span className="text-[16px] font-bold">Sign out</span>
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </header>
