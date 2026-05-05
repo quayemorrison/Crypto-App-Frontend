@@ -36,10 +36,12 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/explore" element={<Explore />} />
-          <Route path="/assets/:id" element={<AssetDetail />} />
           <Route path="/learn" element={<Learn />} />
-          <Route path="/profile" element={<Profile />} />
         </Route>
+
+        {/* Pages with their own layout */}
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/assets/:id" element={<AssetDetail />} />
 
         {/* Auth pages WITHOUT layout */}
         <Route path="/signin" element={<SignIn />} />
