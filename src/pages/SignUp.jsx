@@ -29,7 +29,7 @@ function SignUp() {
 
       if (response.status === 201) {
         if (response.data.token) {
-          localStorage.setItem('token', response.data.token);
+          sessionStorage.setItem('token', response.data.token);
         }
         navigate("/");
       }

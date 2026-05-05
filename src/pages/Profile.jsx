@@ -20,7 +20,7 @@ function Profile() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = sessionStorage.getItem('token');
         const [profileRes, cryptoRes] = await Promise.all([
           axios.get("/api/auth/profile", {
             withCredentials: true,
@@ -43,7 +43,7 @@ function Profile() {
   const handleLogout = async () => {
     try {
       await axios.post("/api/auth/logout", {}, { withCredentials: true });
-      localStorage.removeItem('token');
+      sessionStorage.removeItem('token');
       localStorage.removeItem("cookieBannerDismissed");
       navigate("/signin");
     } catch (err) {
