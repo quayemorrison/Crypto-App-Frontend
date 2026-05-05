@@ -55,6 +55,9 @@ src/
 │   ├── common/      # Shared components (Button, Card, Input, etc.)
 │   ├── layout/      # Layout components (Navbar, Footer, Sidebar)
 │   └── crypto/      # Crypto-specific components (CryptoCard, PriceChart)
+│
+│   # Deployment 2.0 Sync: 2026-05-05
+│
 ├── pages/           # Page components
 │   ├── Home.jsx
 │   ├── Explore.jsx
