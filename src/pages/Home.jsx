@@ -15,7 +15,7 @@ function Home() {
     useEffect(() => {
         const token = sessionStorage.getItem('token');
         if (token) {
-            navigate("/profile");
+            navigate("/dashboard");
         }
     }, [navigate]);
 

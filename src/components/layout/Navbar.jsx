@@ -779,7 +779,7 @@ function Navbar() {
                     {/* Auth Buttons */}
                     {isAuthenticated ? (
                         <Link
-                            to="/profile"
+                            to="/dashboard"
                             className="flex items-center gap-2 whitespace-nowrap px-6 py-2.5 rounded-full bg-blue-600 text-white text-base font-bold hover:bg-blue-700 transition-all"
                         >
                             <LayoutGrid size={20} />

@@ -40,7 +40,7 @@ function App() {
         </Route>
 
         {/* Pages with their own layout */}
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<Profile />} />
         <Route path="/assets/:id" element={<AssetDetail />} />
 
         {/* Auth pages WITHOUT layout */}
