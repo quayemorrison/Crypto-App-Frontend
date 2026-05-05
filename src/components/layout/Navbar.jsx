@@ -289,8 +289,16 @@ function Navbar() {
 
     useEffect(() => {
         const checkAuth = async () => {
+            const token = sessionStorage.getItem('token');
+            if (!token) {
+                setIsAuthenticated(false);
+                return;
+            }
             try {
-                await axios.get('/api/auth/profile', { withCredentials: true });
+                await axios.get('/api/auth/profile', { 
+                    withCredentials: true,
+                    headers: { Authorization: `Bearer ${token}` }
+                });
                 setIsAuthenticated(true);
             } catch (err) {
                 setIsAuthenticated(false);
@@ -772,10 +780,10 @@ function Navbar() {
                     {isAuthenticated ? (
                         <Link
                             to="/profile"
-                            className="flex items-center gap-2 whitespace-nowrap px-5 py-2.5 rounded-full bg-gray-100 text-base font-bold hover:bg-gray-200"
+                            className="flex items-center gap-2 whitespace-nowrap px-6 py-2.5 rounded-full bg-blue-600 text-white text-base font-bold hover:bg-blue-700 transition-all"
                         >
-                            <Users size={20} />
-                            Profile
+                            <LayoutGrid size={20} />
+                            Dashboard
                         </Link>
                     ) : (
                         <>
