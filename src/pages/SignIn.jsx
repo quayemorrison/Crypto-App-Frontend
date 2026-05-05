@@ -37,7 +37,7 @@ function SignIn() {
         if (response.data.token) {
           sessionStorage.setItem('token', response.data.token);
         }
-        navigate("/dashboard");
+        navigate("/dashboard", { replace: true });
       }
     } catch (err) {
       setError(err.response?.data?.message || "Invalid email or password");
